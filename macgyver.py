@@ -14,7 +14,12 @@ def menu():
     for k,v in itemperson.items():
         print(k + ': ' + v)
     choice = input('choose an item/person: ')
-    return choice
+    choice = choice.upper()
+    if choice not in itemperson.keys():
+        print('choose a letter in the list')
+        menu()
+    else:
+        return choice
 
 #
 # make a research of items/person and display labyrinth
@@ -26,7 +31,9 @@ def research(ch):
             if val == ch:
                 i,v = index+1,ind+1
         print()
-    print('the %s is in position: %d,%d' %(itemperson[ch],i,v))
+    article = 'the ' + itemperson[ch]
+    it = itemperson[ch] if ch == 'M' else article
+    print('%s is in position: %d,%d' %(it,i,v))
 
 #    
 # main programm
