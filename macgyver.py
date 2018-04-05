@@ -31,9 +31,13 @@ def research(ch):
             if val == ch:
                 i,v = index+1,ind+1
         print()
-    article = 'the ' + itemperson[ch]
-    it = itemperson[ch] if ch == 'M' else article
-    print('%s is in position: %d,%d' %(it,i,v))
+    # ternary
+    #article = 'the ' + itemperson[ch]
+    #it = itemperson[ch] if ch == 'M' else article
+    #print('%s is in position: %d,%d' %(it,i,v))
+    ###########
+    print(('the ' + itemperson[ch] if ch != 'M' else itemperson[ch]) + ' is in position: %d, %d'%(i,v)) #alternative ternary in print
+    print
 
 #    
 # main programm
