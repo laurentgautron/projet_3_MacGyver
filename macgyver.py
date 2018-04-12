@@ -47,7 +47,7 @@ class Macgyver:
             self.line = 1
             self.column = 0
         print("lines and columns of movement :",self.line,self.column) # check new indices position
-          
+        
         
     def macgyver_bag(self,ind,bag):  # to fill macgyver's bag
             if ind == "B":
@@ -67,7 +67,7 @@ class Macgyver:
         
 class Items:  # to deposit items randomly except the guardian
     
-    def __init__(self): # initial position for the guardian
+    def __init__(self): 
         self.guardian_line = 2
         self.guardian_column = 15
         #self.syringe_line = 
@@ -76,14 +76,29 @@ class Items:  # to deposit items randomly except the guardian
         #self.poison_column = 
         #self.blowpipe_line = 
         #self.blowpipe_column = 
-           
 
-############################### 
-# main programm in a function #
-###############################
+    
+#########
+# rules #
+#########
+
+def rules():
+    print('This is a Maze Game :')
+    print("you must help MacGyver to exit the Labyrinth")
+    print("you can move him with the keyboard keys")
+    print("Macgyver have to bring together all the items before to present onself to the Gardien:")
+    print(" P is the Poison")
+    print(" D is the Dart")
+    print(" B is the blowpipe")
+    print(" G is the Guardian")
+    print("goog luck !!")
+    
+########    
+# menu #
+########
 
 def menu():
-    print("move MacGyver")
+    print("move MacGyver : (M)")
     print("to the top   : type 'z'")
     print("to the right. : type 'd'")
     print("to the left : type 'q'")
@@ -95,11 +110,17 @@ def menu():
         menu()
     return choice
         
+############################### 
+# main programm in a function #
+###############################
+
 def main():
     macgyver = Macgyver()
     labyrinth = Labyrinth()  
     item = Items()
     bag = []
+    rules()
+    conditions =''
     tmp_line = macgyver.INITIAL_LINE
     tmp_column = macgyver.INITIAL_COLUMN
     print("MacGyver is located in: line",tmp_line,", column",tmp_column)
@@ -117,15 +138,12 @@ def main():
             macgyver_newline = tmp_line + macgyver.line        # edit indices
             macgyver_newcolumn = tmp_column + macgyver.column  # for new position
             print("MacGyver's position : ",macgyver_newline,macgyver_newcolumn)
-            print(lab[macgyver_newline][macgyver_newcolumn])
-            print(len(bag))
+            #print(lab[macgyver_newline][macgyver_newcolumn])
             if lab[macgyver_newline][macgyver_newcolumn] in ["B","S","P"]:
-                print(bag)
                 macgyver.macgyver_bag(lab[macgyver_newline][macgyver_newcolumn],bag)
-                print(macgyver.object_name)
+                #print(macgyver.object_name)
                 bag.append(macgyver.object_name)
-                print(bag)
-                print(len(bag))
+                print("your bag : ",bag)
             labyrinth.display_lab(lab,macgyver_newline,macgyver_newcolumn,tmp_line,tmp_column)
             print()
             if labyrinth.wall == 'True':  # check wall or space
@@ -133,12 +151,10 @@ def main():
             else:
                 tmp_line = macgyver_newline
                 tmp_column = macgyver_newcolumn
-            print(labyrinth.guardian)
     if conditions == 'wrong':
         pass          
     else:
         print(" you win !!!!!")   
-            
-    
+             
      
 main()    
