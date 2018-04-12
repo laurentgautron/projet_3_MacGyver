@@ -11,24 +11,27 @@ import json
 class Labyrinth:
     
     def display_lab(self,lab,macgyver_newline,macgyver_newcolumn,tmp_line,tmp_column):
-        self.objectfound = "FALSE"
-        if lab[macgyver_newline][macgyver_newcolumn] in ["B","S","P"]:
-            self.macbag = lab[macgyver_newline][macgyver_newcolumn]
-            self.objectfound = "TRUE"
-            pass
-        else:
+        self.wall = 'False'
+        self.guardian = "no"
+        if lab[macgyver_newline][macgyver_newcolumn] == "G":
+            self.guardian = "yes"           
+        if lab[macgyver_newline][macgyver_newcolumn] in ["B","S","P","G"] or lab[macgyver_newline][macgyver_newcolumn] == " " or (macgyver_newline == 13 and macgyver_newcolumn == 1):
             lab[tmp_line][tmp_column] = " "            
             lab[macgyver_newline][macgyver_newcolumn] = "M"
             for lines in lab:
                 for columns in lines:
                     print(columns,end='')
                 print()
+        else:    
+            print("there is a wall, you can't move in this direction")
+            self.wall = 'True'
+        
     
 class Macgyver:
     
     # initial position for macgyver
     INITIAL_LINE = 13
-    INIIAL_COLUMN = 1
+    INITIAL_COLUMN = 1
     
     def mac_move(self,moving): # to move macgyver
         if moving == 'z':
@@ -43,25 +46,28 @@ class Macgyver:
         else:
             self.line = 1
             self.column = 0
+        print("lines and columns of movement :",self.line,self.column) # check new indices position
           
         
-    def macgyver_bag(self,macbag):  # to fill macgyver's bag
-            
-            if macbag == "B":
+    def macgyver_bag(self,ind,bag):  # to fill macgyver's bag
+            if ind == "B":
                 self.object_name = "blowpipe"
-            elif macbag == "P":
+            elif ind == "P":
                 self.object_name = "poison"
             else:
                 self.object_name = "syringe"
-            if self.objectfound == 'TRUE':
-                print("vous avez ramassé un objet the %s" %(self.object_name))
+            print("you've picked up the %s" %(self.object_name))
+            print("you have %d items in your bag" %(len(bag)+1))
+            if len(bag)+1 == 3:
+                print("you own all the item to asleep the guardian, go to the exit !!")
             else:
-                pass
-            
+                sp = '' if len(bag) == 1 else 's'
+                print(f"you own only {len(bag)+1} item{sp}, you still need {3-(len(bag)+1)} item{sp}")
+                        
         
 class Items:  # to deposit items randomly except the guardian
     
-    def __init__(self): # initial psition for the guardian
+    def __init__(self): # initial position for the guardian
         self.guardian_line = 2
         self.guardian_column = 15
         #self.syringe_line = 
@@ -93,52 +99,46 @@ def main():
     macgyver = Macgyver()
     labyrinth = Labyrinth()  
     item = Items()
-    game = 'go'
     bag = []
     tmp_line = macgyver.INITIAL_LINE
-    tmp_column = macgyver.INIIAL_COLUMN
+    tmp_column = macgyver.INITIAL_COLUMN
     print("MacGyver is located in: line",tmp_line,", column",tmp_column)
     with open("labyrinth.json", 'r') as fichlab:
         lab = json.load(fichlab)
-    labyrinth.display_lab(lab,macgyver.INITIAL_LINE,macgyver.INIIAL_COLUMN,0,0) # display labyrinth
-    while game != 'end':
-        moving = menu()
-        macgyver.mac_move(moving)   # make Macgyver move
-        print("les lignes et colonnes de déplacement :",macgyver.line,macgyver.column) # check new indices position
-        macgyver_newline = tmp_line + macgyver.line  # edit indices
-        macgyver_newcolumn = tmp_column + macgyver.column
-        print("la position: ",macgyver_newline,macgyver_newcolumn)  # check new position
-        if lab[macgyver_newline][macgyver_newcolumn] == "*":  # check wall or space
-            print("you can't move in this direction, there is a wall, try an other movement")
-            print()
-            continue
+    labyrinth.display_lab(lab,macgyver.INITIAL_LINE,macgyver.INITIAL_COLUMN,0,0) # display labyrinth
+    while  not (len(bag) == 3 and labyrinth.guardian == "yes"):  # good conditions
+        if len(bag) < 3 and labyrinth.guardian == "yes":  #wrong conditions
+            print("you've losed: you don't have all items to asleep the guardian")
+            conditions = 'wrong'
+            break
         else:
-            print("new position for MacGyver: line",macgyver_newline,", column ",macgyver_newcolumn)
-            print("last position : ",tmp_line,tmp_column)
+            moving = menu()
+            macgyver.mac_move(moving)   # make Macgyver move
+            macgyver_newline = tmp_line + macgyver.line        # edit indices
+            macgyver_newcolumn = tmp_column + macgyver.column  # for new position
+            print("MacGyver's position : ",macgyver_newline,macgyver_newcolumn)
+            print(lab[macgyver_newline][macgyver_newcolumn])
+            print(len(bag))
+            if lab[macgyver_newline][macgyver_newcolumn] in ["B","S","P"]:
+                print(bag)
+                macgyver.macgyver_bag(lab[macgyver_newline][macgyver_newcolumn],bag)
+                print(macgyver.object_name)
+                bag.append(macgyver.object_name)
+                print(bag)
+                print(len(bag))
             labyrinth.display_lab(lab,macgyver_newline,macgyver_newcolumn,tmp_line,tmp_column)
-        tmp_line = macgyver_newline
-        tmp_column = macgyver_newcolumn
-        print(tmp_line,tmp_column)
-        print(lab[macgyver_newline][macgyver_newcolumn])
-        print(bag)
-        if labyrinth.objectfound == "TRUE":
-            bag.extend(labyrinth.macbag)
-        print(labyrinth.objectfound)
-        if len(bag) == 0:
-            print("vous n'avez aucun objet, continuez à chercher")
-        elif len(bag) < 3:
-            print("vous avez %d objets il vous en manque %d" %(len(bag),3-len(bag)))
-        else:
-            print("vous avez tous les objets nécessaires pour endormir le garde, vous devez encore trouver la sortie")
-        if  not (lab[macgyver_newline][macgyver_newcolumn] == "G" and len(bag) == 3):
-            continue
-        elif lab[macgyver_newline][macgyver_newcolumn] == "G" and len(bag) == 3:
-            print("vous avez gagné !!!")
-            game = 'end'
-        else:
-            print("vous êtes mort: vous n'aviez pas tous les objets")
-            game = 'end'
-        break
+            print()
+            if labyrinth.wall == 'True':  # check wall or space
+                continue
+            else:
+                tmp_line = macgyver_newline
+                tmp_column = macgyver_newcolumn
+            print(labyrinth.guardian)
+    if conditions == 'wrong':
+        pass          
+    else:
+        print(" you win !!!!!")   
+            
     
      
 main()    
