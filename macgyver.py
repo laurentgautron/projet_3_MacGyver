@@ -154,7 +154,10 @@ def main():
     if conditions == 'wrong':
         pass          
     else:
-        print(" you win !!!!!")   
+        print(" you win !!!!!")
+        
+if __name__ == "__main__":
+    main()  
              
      
 main()    
