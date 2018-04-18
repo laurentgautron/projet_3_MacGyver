@@ -1,4 +1,4 @@
-""" this is the tex you need in the game of Labyrinth to show the rules and move MacGyver """
+""" this is the text you need in the game of Labyrinth to show the rules and move MacGyver """
 
 #! /usr/bin/env python3
 # coding: utf-8
@@ -13,9 +13,16 @@ class Textdescription:
         print("now you can play")
         
     def menu(self):
-        print("to move Macgyver")
-        print("to the top: type 'z'")
-        print("to the right: type 'd'")
-        print("to the left: type 'q'")
-        print("to the down: type 's'")
-        return input("your choice: ")
+        ch = ''
+        while ch not in ['z','d','q','s']:
+            print("move Macgyver")
+            print("to the top: type 'z'")
+            print("to the right: type 'd'")
+            print("to the left: type 'q'")
+            print("to the down: type 's'")
+            ch = input('your choice: ')
+            if ch not in ['z','d','q','s']:
+                print('be carefull, this choice is not in the list !!')
+                continue
+            else:
+                return ch

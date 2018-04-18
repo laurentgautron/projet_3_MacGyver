@@ -3,38 +3,42 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-import textdescription
-import labyrinth
-import macgyver
-import test
+from textdescription import Textdescription
+from labyrinth import Labyrinth
+from macgyver import Macgyver
+from test import Test
 
-class Game:
+class Main:
     def __init__(self):
-        last_x = 1
-        last_y = 13
-        testcase = Test()
+        x, y = 0, 0
+        last_x, last_y = 13, 1
+        testbox = Test()
         text = Textdescription()
         text.rules()    # write rules
-        lab = Labyrinth()    # init labyrinth in lab with items randomly
-        macgyver = Macgyver() # init MavGyver's position
-        lab.display_lab(macgyver.x,macgyver.y,1,13)
+        labyrinth = Labyrinth('labyrinth.json')    # init labyrinth in lab with items randomly
+        mcgyver = Macgyver() # init MavGyver's position
+        labyrinth.display_lab(mcgyver.x,mcgyver.y,last_x,last_y)
         bag = []  # init MacGyver's bag
-        print(f"MacGyver is in line {macgyver.x} and column {macgyver.y}")# show MacGyver's position
-        while x != 13 and y != 1:  # repeat while position is not guardian's position
+        print("MacGyver is in line %d and column %d" %(mcgyver.x,mcgyver.y))# show MacGyver's position
+        print(bag)
+        while (x,y) != (1,14):  # repeat while position is not guardian's position
             choice = text.menu()   # display menu to move MacGyver and choose a new position
-            x, y = macgyver.move(choice)  # read new position for MacGyver
-            if testcase.there_is_a_wall(x,y):   # check if there is not a wall
+            x,y = mcgyver.move(choice)  # read new position for MacGyver
+            print(x, y)
+            if testbox.there_is_a_wall(labyrinth.lab,x,y):   # check if there is not a wall
                 print("you can't move: there is a wall in this direction")
-                print("try again") 
-                x, y = sellast_x, last_y    # don't move 
+                print("try again")
+                mcgyver.x,mcgyver.y = last_x,last_y # don't move
+                print ('toujours en :', x,y)     
                 continue # try again   
-            if testcase.there_is_an_item(x,y):   # check if there is not an item
-                it = lab[x][y]
-                bag.extend(macgyver.bagcontents(it))
+            elif testbox.there_is_an_item(labyrinth.lab,x,y):   # check if there is not an item
+                it = labyrinth.lab[x][y]
+                bag.append(mcgyver.bagcontents(it))
                 print("bag contents: ", bag)   # fill the bag
-            lab.displa_lab(x,y,last_x,last_y)   # move Macgyver: display labyrinth
+            labyrinth.display_lab(x,y,last_x,last_y)  # move Macgyver: display labyrinth
             last_x = x   # stock MacGyver last position
             last_y = y
+            print(bag)
 
         if len(bag) != 3:   # check if there is three items in bag
             print("you loose: you dont own all the items to asleep the guardian")

@@ -1,3 +1,5 @@
+""" lass test if there is a wall or an item """
+
 #! /usr/bin/env python3
 # coding: utf-8
 

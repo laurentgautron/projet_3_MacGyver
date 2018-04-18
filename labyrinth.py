@@ -1,18 +1,41 @@
+""" init labyrinth and display labyrinth """
+
 #! /usr/bin/env python3
 # coding: utf-8
 
 import json
+import random
+import os
 
 class Labyrinth:   
-    def __init__(self, labyrinth.json):
-        with open('labyrinth.json', 'r') as labfich:
-            self.lab = json.load(labfich)
-        self.lab[1][14] = 'G'
+    def __init__(self, map_lab):
+        with open(map_lab, 'r') as labfich:
+            try:
+                self.lab = json.load(labfich)
+            except OSError:
+                print('cannot open file')
+            else:
+                self.lab[1][14] = 'G'
+                notfree = ['*','G']
+                list_items = ['B','P','S']
+                while list_items != []:
+                    column = random.randint(0,14)
+                    line = random.randint(0,14)
+                    print(line, column)
+                    if self.lab[column][line] not in notfree:
+                        self.lab[column][line] = list_items[0]
+                        notfree.append(list_items[0])
+                        del list_items[0]
+                        print(notfree, list_items)
+                        print(self.lab[column][line])
+                        print(line, column)
+                        print() 
         
-    def display_lab(self,x,y,lastx,lasty):
+    def display_lab(self,x,y,last_x,last_y):
         self.lab[x][y] = 'M'
-        self.lab[lastx][lasty] = ' '
-        for lines in self.lab:
-            for columns in lines:
-                print(columns, end='')
+        if (x,y) != (last_x,last_y):
+            self.lab[last_x][last_y] = ' '
+        for line in self.lab:
+            for column in line:
+               print(column, end='')
             print()
