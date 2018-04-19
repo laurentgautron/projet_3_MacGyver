@@ -38,7 +38,6 @@ class Main:
             labyrinth.display_lab(x,y,last_x,last_y)  # move Macgyver: display labyrinth
             last_x = x   # stock MacGyver last position
             last_y = y
-            print(bag)
 
         if len(bag) != 3:   # check if there is three items in bag
             print("you loose: you dont own all the items to asleep the guardian")

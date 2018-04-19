@@ -6,6 +6,7 @@
 import json
 import random
 import os
+import pygame
 
 class Labyrinth:   
     def __init__(self, map_lab):
@@ -32,10 +33,19 @@ class Labyrinth:
                         print() 
         
     def display_lab(self,x,y,last_x,last_y):
+        pygame.init()
+        ecran = pygame.display.set_mode((600,600))
+        imagemur = pygame.image.load('mur.bmp').convert()
+        i,j = 0,0
         self.lab[x][y] = 'M'
         if (x,y) != (last_x,last_y):
             self.lab[last_x][last_y] = ' '
         for line in self.lab:
             for column in line:
-               print(column, end='')
+                if column == '*':
+                    ecran.blit(imagemur,(i,j))
+                    pygame.display.flip()
+                print(column, end='')
+                j += 1
+            i +=1
             print()
