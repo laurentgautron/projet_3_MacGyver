@@ -43,3 +43,6 @@ class Main:
             print("you loose: you dont own all the items to asleep the guardian")
         else:
             print("good work, you won")
+            
+if __name__ == '__main__':
+    main = Main()
