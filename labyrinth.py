@@ -16,8 +16,7 @@ class Labyrinth:
             except OSError:
                 print('cannot open file')
             else:
-                self.lab[1][14] = 'G'
-                notfree = ['*','G']
+                notfree = ['*','G','M']
                 list_items = ['B','P','S']
                 while list_items != []:
                     column = random.randint(0,14)
@@ -33,19 +32,16 @@ class Labyrinth:
                         print() 
         
     def display_lab(self,x,y,last_x,last_y):
-        pygame.init()
-        ecran = pygame.display.set_mode((600,600))
-        imagemur = pygame.image.load('mur.bmp').convert()
-        i,j = 0,0
-        self.lab[x][y] = 'M'
         if (x,y) != (last_x,last_y):
             self.lab[last_x][last_y] = ' '
         for line in self.lab:
             for column in line:
-                if column == '*':
-                    ecran.blit(imagemur,(i,j))
-                    pygame.display.flip()
                 print(column, end='')
-                j += 1
-            i +=1
             print()
+            
+    def found_macgyver(self):
+        for i, line in enumerate(self.lab):
+            for j, column in enumerate(line):
+                if column == 'M':
+                    self.macinitpos_x = j
+                    self.macinitpos_y = i

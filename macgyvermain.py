@@ -8,19 +8,18 @@ from labyrinth import Labyrinth
 from macgyver import Macgyver
 from test import Test
 
-class Main:
+class MacgyverMain:
     def __init__(self):
-        x, y = 0, 0
-        last_x, last_y = 13, 1
         testbox = Test()
         text = Textdescription()
         text.rules()    # write rules
         labyrinth = Labyrinth('labyrinth.json')    # init labyrinth in lab with items randomly
+        x, y = labyrinth.found_macgyver.macinitpos_x, labyrinth.found_macgyver.macinitpos_y
+        last_x, last_y = x, y
         mcgyver = Macgyver() # init MavGyver's position
-        labyrinth.display_lab(mcgyver.x,mcgyver.y,last_x,last_y)
+        labyrinth.display_lab(x,y,last_x,last_y)
         bag = []  # init MacGyver's bag
-        print("MacGyver is in line %d and column %d" %(mcgyver.x,mcgyver.y))# show MacGyver's position
-        print(bag)
+        print("MacGyver is in line %d and column %d" %(x,y))# show MacGyver's position
         while (x,y) != (1,14):  # repeat while position is not guardian's position
             choice = text.menu()   # display menu to move MacGyver and choose a new position
             x,y = mcgyver.move(choice)  # read new position for MacGyver
@@ -45,4 +44,4 @@ class Main:
             print("good work, you won")
             
 if __name__ == '__main__':
-    main = Main()
+    main = MacgyverMain()
