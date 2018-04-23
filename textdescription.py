@@ -1,10 +1,8 @@
-""" this is the text you need in the game of Labyrinth to show the rules and move MacGyver """
-
 #! /usr/bin/env python3
 # coding: utf-8
 
 class Textdescription:
-    
+    """ print text for rules and explanations how to move Macgyver (menu) """
     def rules(self):
         print("this is a labyrinth game: you must help MacGyver to find the exit")
         print("for it , you need to asleep the guardian with items which scattered in this labyrinth")

@@ -9,39 +9,44 @@ from macgyver import Macgyver
 from test import Test
 
 class MacgyverMain:
+    """ two function in this class : the init function to define instances, initialize and show position of Macgyver, Guardianand items
+        in thr labyrinth. The second function is used to play """
     def __init__(self):
-        testbox = Test()
-        text = Textdescription()
-        text.rules()    # write rules
-        labyrinth = Labyrinth('labyrinth.json')    # init labyrinth in lab with items randomly
-        x, y = labyrinth.found_macgyver.macinitpos_x, labyrinth.found_macgyver.macinitpos_y
-        last_x, last_y = x, y
-        mcgyver = Macgyver() # init MavGyver's position
-        labyrinth.display_lab(x,y,last_x,last_y)
-        bag = []  # init MacGyver's bag
-        print("MacGyver is in line %d and column %d" %(x,y))# show MacGyver's position
-        while (x,y) != (1,14):  # repeat while position is not guardian's position
-            choice = text.menu()   # display menu to move MacGyver and choose a new position
-            x,y = mcgyver.move(choice)  # read new position for MacGyver
-            print(x, y)
-            if testbox.there_is_a_wall(labyrinth.lab,x,y):   # check if there is not a wall
+        # instances and variables we need to play
+        self.testbox = Test()
+        self.text = Textdescription()
+        self.text.rules()    # write rules
+        self.mcgyver = Macgyver()
+        self.labyrinth = Labyrinth('labyrinth.json')    # init labyrinth in lab with items randomly
+        self.x, self.y = self.labyrinth.found('M') # found Macgyver
+        self.guardian_x,self.guardian_y = self.labyrinth.found('G')
+        self.last_x, self.last_y = self.x, self.y
+        print("MacGyver is in line %d and column %d" %(self.x,self.y))# show MacGyver's position
+        print("guardian is in line %d and column %d" %(self.guardian_x,self.guardian_y))
+        self.bag = []  # init MacGyver's bag
+        self.labyrinth.display_lab(self.x,self.y,self.last_x,self.last_y)
+
+    def play(self):
+        while (self.x,self.y) != (self.guardian_x,self.guardian_y):  # repeat while position is not guardian's position
+            choice = self.text.menu()   # display menu to move MacGyver and choose a new position
+            self.x,self.y = self.mcgyver.move(choice,self.last_x,self.last_y)  # read new position for MacGyver
+            if self.testbox.there_is_a_wall(self.labyrinth.lab,self.x,self.y):   # check if there is not a wall
                 print("you can't move: there is a wall in this direction")
                 print("try again")
-                mcgyver.x,mcgyver.y = last_x,last_y # don't move
-                print ('toujours en :', x,y)     
-                continue # try again   
-            elif testbox.there_is_an_item(labyrinth.lab,x,y):   # check if there is not an item
-                it = labyrinth.lab[x][y]
-                bag.append(mcgyver.bagcontents(it))
-                print("bag contents: ", bag)   # fill the bag
-            labyrinth.display_lab(x,y,last_x,last_y)  # move Macgyver: display labyrinth
-            last_x = x   # stock MacGyver last position
-            last_y = y
-
-        if len(bag) != 3:   # check if there is three items in bag
+                print ('toujours en :', self.last_x,self.last_y)
+                continue
+            elif self.testbox.there_is_an_item(self.labyrinth.lab,self.x,self.y):   # check if there is not an item
+                it = self.labyrinth.lab[self.x][self.y]
+                self.bag.append(self.mcgyver.bagcontents(it))   # fill the bag
+                print("bag contents: ", self.bag)   
+            self.labyrinth.display_lab(self.x,self.y,self.last_x,self.last_y)
+            self.last_x = self.x   # stock MacGyver last position
+            self.last_y = self.y
+        if len(self.bag) != 3:   # check if there is three items in bag
             print("you loose: you dont own all the items to asleep the guardian")
         else:
             print("good work, you won")
             
 if __name__ == '__main__':
     main = MacgyverMain()
+    main.play()
