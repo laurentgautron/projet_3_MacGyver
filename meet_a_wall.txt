@@ -1,0 +1,2 @@
+"you can't move is this direction: there is a wall !!"
+"try again ."
