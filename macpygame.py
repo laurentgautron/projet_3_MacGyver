@@ -11,7 +11,7 @@ class Macpygame:
 	""" three functions in this class: __init__ to create person and items,  display to display labyrinth with pygame and display_text to write text on the screen """
 	def __init__(self): #  conten pictures for items, Macgyver and Guardian for pygame
 		pygame.init()
-		self.ecran = pygame.display.set_mode((600,800), RESIZABLE)
+		self.ecran = pygame.display.set_mode((750,950))
 		self.mur = pygame.image.load('carre.bmp').convert()
 		self.joueurmac = pygame.image.load('carreb.bmp').convert()
 		self.guard = pygame.image.load('carrer.bmp').convert()
@@ -25,8 +25,8 @@ class Macpygame:
 		continuer = True
 		for indices, values in enumerate(lab):
 			for ind, val in enumerate(values):
-				perso_x = ind * 40
-				perso_y = indices * 40
+				perso_x = ind * 50
+				perso_y = indices * 50
 				if val == '*':
 					self.ecran.blit(self.mur,(perso_x,perso_y))
 				if val == 'M':
@@ -46,9 +46,9 @@ class Macpygame:
 		i = 10
 		with open(chain, 'r') as textfich:
 			for sentence in textfich:
-				font = pygame.font.SysFont('Comic Sans MS', 12)
+				font = pygame.font.SysFont('Comic Sans MS', 15)
 				text = font.render(sentence, True,(255,255,255))
-				self.ecran.blit(text,(10,650+i))
+				self.ecran.blit(text,(10,750+i))
 				i += 20
 		pygame.display.flip()
 		continuer = True

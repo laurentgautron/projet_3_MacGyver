@@ -18,7 +18,7 @@ class MacgyverMain:
         self.mcgyver = Macgyver()
         self.labyrinth = Labyrinth('labyrinth.json')    # init labyrinth in lab with items randomly
         self.x, self.y = self.labyrinth.found('M') # found Macgyver
-        self.guardian_x,self.guardian_y = self.labyrinth.found('G'). # found Guardian
+        self.guardian_x,self.guardian_y = self.labyrinth.found('G')   # found Guardian
         self.last_x, self.last_y = self.x, self.y # first and last positon are the same at the beginning
         self.bag = []  # init MacGyver's bag
         self.labyrinth.display_lab(self.x,self.y,self.last_x,self.last_y)
