@@ -1,8 +1,3 @@
-""" Change MacGyver's position and bagcontents """
-
-#! /usr/bin/env python3
-# coding: utf-8
-
 import pygame
 from pygame.locals import *
 import sys
@@ -18,6 +13,7 @@ class Macgyver:
     def move(self,lastx,lasty): # change last position according to Keyboard key
         self.x = lastx
         self.y = lasty
+        pygame.event.set_allowed(pygame.MOUSEMOTION)
         event = pygame.event.wait()
         if event.type == KEYDOWN:
             if event.key == K_UP:
