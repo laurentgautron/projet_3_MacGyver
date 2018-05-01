@@ -1,14 +1,13 @@
-
-import pygame
-from pygame.locals import *
 import sys
 import json
 
-#from textdescription import Textdescription
+import pygame
+from pygame.locals import *
 
 class Macpygame:
-	""" three functions in this class: __init__ to create person and items,  display to display labyrinth with pygame and display_text to write text on the screen """
-	def __init__(self): #  conten pictures for items, Macgyver and Guardian for pygame
+	""" """
+	def __init__(self):
+		""" create screen for the game loading image for wall, gaurdian, poison, syringe, blowpipe and empty square"""
 		pygame.init()
 		self.screen = pygame.display.set_mode((750,950))
 		self.empty = pygame.image.load('images_box/empty_box.bmp').convert()
@@ -20,12 +19,14 @@ class Macpygame:
 		self.poison = pygame.image.load('images_box/poison_box.bmp').convert()
 
 	def display(self,lab):
-		perso_x = 0
+		""" copy pictures on the screen testing in lab file what is in the square:
+		item , person or wall and ten display it"""
+		perso_x = 0 # squares indices
 		perso_y = 0
 		continuer = True
-		for indices, values in enumerate(lab):
+		for indices, values in enumerate(lab): # two loop to get square indices
 			for ind, val in enumerate(values):
-				perso_x = ind * 50
+				perso_x = ind * 50 # square indices on the screen 
 				perso_y = indices * 50
 				if val == ' ':
 					self.screen.blit(self.empty,(perso_x,perso_y))
@@ -43,9 +44,10 @@ class Macpygame:
 					self.screen.blit(self.poison,(perso_x,perso_y))
 		pygame.display.flip()
 
-	def display_text(self,chain): # display according to the situation with text planned in a fich
+	def display_text(self,chain):
+		""" open text file recover in chain, define a font and display text line by line """
 		pygame.font.init()
-		i = 10
+		i = 10 # counter to space out text after each line
 		with open(chain, 'r') as textfich:
 			for sentence in textfich:
 				font = pygame.font.SysFont('Comic Sans MS', 15)

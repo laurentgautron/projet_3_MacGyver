@@ -7,9 +7,7 @@ from macpygame import Macpygame
 
 
 class Labyrinth:
-
-    """   init function open labyrinth fich, display labyrinth ( write 'M' at MacGyver's position and ' 'at MacGyver's last place) and choose randomly location for items 
-    labyrinth is displayed wthin function display _lab, and function found look for persons(choose in the main) in the labyrinth  """
+    """ """
 
     def __init__(self, map_lab,macpygame): # open the fich lab and create labyrinth with list_items
         self.macpygame = macpygame
@@ -41,3 +39,15 @@ class Labyrinth:
                     self.pos_x = i
                     self.pos_y = j
         return self.pos_x,self.pos_y
+
+    def there_is_a_wall(self,lab,x,y):
+        if lab[x][y] == '*':
+            return True
+        else:
+            return False
+            
+    def there_is_an_item(self,lab,x,y):
+        if lab[x][y] in ['B','P','S']:
+            return True
+        else:
+            return False
