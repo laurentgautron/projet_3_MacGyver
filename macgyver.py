@@ -15,7 +15,7 @@ class Macgyver:
     def __init__(self):
         """ create a text file for bag contents """
 
-        with open('bagcontents.txt', 'w') as init_bag:
+        with open('textfiles/bagcontents.txt', 'w') as init_bag:
             init_bag.write("you've got already in your bag:")
 
     def move(self,lastx,lasty,event):
@@ -64,6 +64,6 @@ class Macgyver:
             arg item_piece : string, name for the item wtrited in bagcontents.txt
         """
 
-        with open('bagcontents.txt', 'a') as item_fich:
+        with open('textfiles/bagcontents.txt', 'a') as item_fich:
             item_fich.write("\n"+item_piece)
             
