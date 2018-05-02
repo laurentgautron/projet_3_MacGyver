@@ -2,4 +2,4 @@ This is a labyrinth game: you must help MacGyver to find the exit
 For it , you need to asleep the guardian with items which scattered in this labyrinth
 You can move MacGyver with keyboards arrows
 To win , you have to pick up all items: poison, blowpipe, an syringe and go in front of the Guardian
-Now, do you want to play (y,n)?
+Now, play

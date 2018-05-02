@@ -1,6 +1,11 @@
-this is MacGyver Project:
-not terminated : you'll have more détails later
-i must finish it before.
 
-at first, i teach "enumerate" to parse and get indices ,values from a dict.
-for instance i just try to write good code and use method correctly.
+  This is MacGyver Project: program in python language 
+
+It's a labyrinth game: you must help MacGyver to find the exit
+For it , you need to asleep the guardian with items which scattered in this labyrinth
+You can move MacGyver with keyboards arrows
+To win , you have to pick up all items: poison, blowpipe, an syringe and go in front of the Guardian
+
+List for all packages you need are in requirement.txt
+
+To start the game just open game.py

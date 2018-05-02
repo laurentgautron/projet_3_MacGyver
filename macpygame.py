@@ -5,9 +5,15 @@ import pygame
 from pygame.locals import *
 
 class Macpygame:
-	""" """
+	""" In this class we use the pyagame module to play.
+
+		methods display: to display labyrinth on a screen
+				display_text: to display text on the screen
+	"""
+
 	def __init__(self):
-		""" create screen for the game loading image for wall, gaurdian, poison, syringe, blowpipe and empty square"""
+		""" create screen for the game loading image for wall, gaurdian, poison, syringe, blowpipe and empty square. """
+
 		pygame.init()
 		self.screen = pygame.display.set_mode((750,950))
 		self.empty = pygame.image.load('images_box/empty_box.bmp').convert()
@@ -20,13 +26,17 @@ class Macpygame:
 
 	def display(self,lab):
 		""" copy pictures on the screen testing in lab file what is in the square:
-		item , person or wall and ten display it"""
-		perso_x = 0 # squares indices
+		item , person or wall and ten display it. """
+
+		# squares indices
+		perso_x = 0
 		perso_y = 0
 		continuer = True
-		for indices, values in enumerate(lab): # two loop to get square indices
+		# two loop to get square indices
+		for indices, values in enumerate(lab):
 			for ind, val in enumerate(values):
-				perso_x = ind * 50 # square indices on the screen 
+				 # square indices on the screen 
+				perso_x = ind * 50
 				perso_y = indices * 50
 				if val == ' ':
 					self.screen.blit(self.empty,(perso_x,perso_y))
@@ -45,22 +55,35 @@ class Macpygame:
 		pygame.display.flip()
 
 	def display_text(self,chain):
-		""" open text file recover in chain, define a font and display text line by line """
+		""" open text file recovered in chain, define a font and display text line by line.
+
+			agr  chain: string, name of the text file
+
+			raise an exception if file is not found
+		"""
+
 		pygame.font.init()
-		i = 10 # counter to space out text after each line
-		with open(chain, 'r') as textfich:
-			for sentence in textfich:
-				font = pygame.font.SysFont('Comic Sans MS', 15)
-				text = font.render(sentence, True,(255,255,255))
-				self.screen.blit(text,(10,750+i))
-				i += 20
-		pygame.display.flip()
-		continuer = True
-		while continuer:
-			event = pygame.event.wait()
-			if event.type == KEYDOWN:
-				continuer = False
-		self.screen.fill(0)
+		# counter to space out text after each line
+		i = 10
+		try:
+			with open(chain, 'r') as textfich:
+				for sentence in textfich:
+					sentence = sentence.rstrip('\n')
+					font = pygame.font.SysFont('Comic Sans MS', 15)
+					text = font.render(sentence, True,(255,255,255))
+					self.screen.blit(text,(10,750+i))
+					i += 20
+		except OSError:
+			print('cannot open file')
+			sys.exit()
+		else:
+			pygame.display.flip()
+			continuer = True
+			while continuer:
+				event = pygame.event.wait()
+				if event.type == KEYDOWN:
+					continuer = False
+			self.screen.fill(0)
 
 
 		
