@@ -1,6 +1,5 @@
 import sys
 
-import pygame
 from pygame.locals import *
 
 
@@ -15,8 +14,12 @@ class Macgyver:
     def __init__(self):
         """ create a text file for bag contents """
 
-        with open('textfiles/bagcontents.txt', 'w') as init_bag:
-            init_bag.write("you've got already in your bag:")
+        try:
+            with open('textfiles/bagcontents.txt', 'w') as init_bag:
+                init_bag.write("you've got already in your bag:")
+        except:
+            print('cannot open the file')
+            sys.exit()
 
     def move(self,lastx,lasty,event):
         """ change macgyver's position 
@@ -64,6 +67,10 @@ class Macgyver:
             arg item_piece : string, name for the item wtrited in bagcontents.txt
         """
 
-        with open('textfiles/bagcontents.txt', 'a') as item_fich:
-            item_fich.write("\n"+item_piece)
+        try:
+            with open('textfiles/bagcontents.txt', 'a') as item_fich:
+                item_fich.write("\n"+item_piece)
+        except:
+            print('cannot open the file')
+            sys.exit()
             

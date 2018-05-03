@@ -1,10 +1,6 @@
 import json
 import random
-import os
 import sys
-
-from macpygame import Macpygame
-
 
 class Labyrinth:
     """ this class do operations with the lab variable, a list of lists representing the labyrinth. 

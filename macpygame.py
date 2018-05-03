@@ -2,6 +2,7 @@ import sys
 import json
 
 import pygame
+
 from pygame.locals import *
 
 class Macpygame:
@@ -74,7 +75,7 @@ class Macpygame:
 					self.screen.blit(text,(10,750+i))
 					i += 20
 		except OSError:
-			print('cannot open file')
+			print('cannot open file ',chain)
 			sys.exit()
 		else:
 			pygame.display.flip()
