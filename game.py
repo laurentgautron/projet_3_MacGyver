@@ -5,11 +5,7 @@ from macgyver import Macgyver
 from macpygame import Macpygame
 
 class Main:
-    """ the labyrinth game
-
-        methods macgyver_bag : to fill macgyver's bag with items
-                play
-    """
+    """  """
     
     def __init__(self):
         """ define instances and variables we need to play found macgyver and gauardian's position. """
