@@ -5,7 +5,6 @@ from macgyver import Macgyver
 from macpygame import Macpygame
 
 class Main:
-    """  """
     
     def __init__(self):
         """ define instances and variables we need to play found macgyver and gauardian's position. """

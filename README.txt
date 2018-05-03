@@ -8,4 +8,4 @@ To win , you have to pick up all items: poison, blowpipe, an syringe and go in f
 
 List for all packages you need are in requirement.txt
 
-To start the game just open game.py
+To start the game just open game.py in the console

@@ -3,13 +3,7 @@ import random
 import sys
 
 class Labyrinth:
-    """ this class do operations with the lab variable, a list of lists representing the labyrinth. 
-
-        methods display_lab : change lab
-                found : resaerch coordinate on lab
-                there_is a wall : test
-                there_is_an_item : test
-    """
+    """ this class do operations with the lab variable, a list of lists representing the labyrinth. """
 
     def __init__(self, map_lab,macpygame):
         """ open the labyrinth file and create labyrinth with list_items randomly. 

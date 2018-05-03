@@ -58,7 +58,7 @@ class Macpygame:
 	def display_text(self,chain):
 		""" open text file recovered in chain, define a font and display text line by line.
 
-			agr  chain: string, name of the text file
+			chain: string, name of the text file
 
 			raise an exception if file is not found
 		"""
