@@ -7,13 +7,13 @@ from macpygame import Macpygame
 class Main:
     
     def __init__(self):
-        """ define instances and variables we need to play found macgyver and gauardian's position. """
+        """ define instances and variables we need to play, find macgyver and gauardian's position. """
 
         self.macpygame = Macpygame()
         self.macgyver = Macgyver()
         self.labyrinth = Labyrinth('labyrinth.json',self.macpygame)
-        self.x, self.y = self.labyrinth.found('M')
-        self.guardian_x,self.guardian_y = self.labyrinth.found('G')
+        self.x, self.y = self.labyrinth.find('M')
+        self.guardian_x,self.guardian_y = self.labyrinth.find('G')
         self.last_x, self.last_y = self.x, self.y
         self.bag = []
 

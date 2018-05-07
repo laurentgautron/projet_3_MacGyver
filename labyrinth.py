@@ -47,7 +47,7 @@ class Labyrinth:
             self.lab[last_x][last_y] = ' '
         self.macpygame.display(self.lab)
             
-    def found(self,person):
+    def find(self,person):
         """ search where are the person in the labyrinth, MacGyver or the Guardian and return position
             
             arg person: string
