@@ -1,16 +1,11 @@
 import sys
-import json
 
 import pygame
 
 from pygame.locals import *
 
 class Macpygame:
-	""" In this class we use the pyagame module to play.
-
-		methods display: to display labyrinth on a screen
-				display_text: to display text on the screen
-	"""
+	""" In this class we use the pyagame module for graphic interface."""
 
 	def __init__(self):
 		""" create screen for the game loading image for wall, gaurdian, poison, syringe, blowpipe and empty square. """
@@ -33,7 +28,7 @@ class Macpygame:
 		perso_x = 0
 		perso_y = 0
 		continuer = True
-		# two loop to get square indices
+		# two loops to get square indices
 		for indices, values in enumerate(lab):
 			for ind, val in enumerate(values):
 				 # square indices on the screen 
