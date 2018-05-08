@@ -1,4 +1,4 @@
 you've got already in your bag:
-Blowpipe
-Poison
 Syringe
+Poison
+Blowpipe

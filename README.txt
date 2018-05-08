@@ -7,5 +7,8 @@ You can move MacGyver with keyboards arrows
 To win , you have to pick up all items: poison, blowpipe, an syringe and go in front of the Guardian
 
 List for all packages you need are in requirement.txt
+Just enter this command: pip install -r requirements.txt to install them
+
 
 To start the game just open game.py in the console
+Entrer the command : python3 game.py
