@@ -1,4 +1,4 @@
 you've got in your bag:
-Syringe
 Blowpipe
 Poison
+Syringe
