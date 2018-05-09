@@ -16,7 +16,7 @@ class Macgyver:
 
         try:
             with open('textfiles/bagcontents.txt', 'w') as init_bag:
-                init_bag.write("you've got already in your bag:")
+                init_bag.write("you've got in your bag:")
         except:
             print('cannot open the file')
             sys.exit()
