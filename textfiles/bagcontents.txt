@@ -1,4 +1,3 @@
 you've got in your bag:
-Blowpipe
-Poison
 Syringe
+Blowpipe
