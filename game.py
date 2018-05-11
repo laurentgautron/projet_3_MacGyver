@@ -1,4 +1,4 @@
-import pygame
+#import pygame
 
 from labyrinth import Labyrinth
 from macgyver import Macgyver
